@@ -63,4 +63,17 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, RegisterActivity.class));
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Get Username and Password
+        TextInputEditText username = findViewById(R.id.username);
+        TextInputEditText password = findViewById(R.id.password);
+
+        username.setError(null);
+        password.setError(null);
+
+    }
 }
