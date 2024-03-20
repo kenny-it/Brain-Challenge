@@ -1,5 +1,6 @@
 package com.speed.brainchallenge;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -50,6 +51,15 @@ public class RegisterActivity extends AppCompatActivity {
                 confirmPassword.setError(null);
                 // show register success message
                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+                // store the username and password in shared preferences
+                SharedPreferences sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                // put the username and password in shared preferences
+                editor.putString(usernameText,passwordText);
+                editor.apply();
+                // go to the login activity
+                finish();
+
             }
         });
     }

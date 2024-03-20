@@ -1,6 +1,7 @@
 package com.speed.brainchallenge;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,16 +29,33 @@ public class LoginActivity extends AppCompatActivity {
             String usernameText = Objects.requireNonNull(username.getText()).toString();
             String passwordText = Objects.requireNonNull(password.getText()).toString();
 
-            // Check if the username and password are correct
-            if (usernameText.equals("admin") && passwordText.equals("admin")) {
-                // If the username and password are correct, go to the main activity
-                // startActivity(new Intent(this, MainActivity.class));
+            // Check if the username and password are valid
+            if (usernameText.isEmpty() || passwordText.isEmpty()) {
+                // If the username or password is empty, show an error message
+                username.setError("Username cannot be empty");
+                password.setError("Password cannot be empty");
+                return;
+            }
+
+           //
+            SharedPreferences users = getSharedPreferences("users", MODE_PRIVATE);
+            String storedPassword = users.getString(usernameText, null);
+            if (passwordText.equals(storedPassword)) {
+                // If the username and password are valid, show a success message
+                username.setError(null);
+                password.setError(null);
                 // show login success message
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                // go to the main activity
+                startActivity(new Intent(this, MainActivity.class));
             } else {
-                // If the username and password are incorrect, show an error message
-                Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                // If the username and password are invalid, show an error message
+                username.setError("Invalid username");
+                password.setError("Invalid password");
+
             }
+
+
         });
 
         registerButton.setOnClickListener(v -> {
