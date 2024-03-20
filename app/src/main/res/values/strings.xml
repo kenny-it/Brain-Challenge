@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Brain Challenge</string>
+    <string name="username">User Name</string>
+    <string name="password">Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="register_button">Register</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register_button_text">Register</string>
 </resources>
