@@ -1,7 +1,12 @@
 package com.speed.brainchallenge;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,10 +22,14 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        setupUI(findViewById(R.id.parent_register));
 
         // Get username, password, confirm password, and register button
         TextInputEditText username = findViewById(R.id.username_text);
@@ -41,10 +50,26 @@ public class RegisterActivity extends AppCompatActivity {
                 username.setError("Username cannot be empty");
                 password.setError("Password cannot be empty");
                 confirmPassword.setError("Confirm password cannot be empty");
-            } else if (!passwordText.equals(confirmPasswordText)) {
+                return;
+            }
+
+            if (!passwordText.equals(confirmPasswordText)) {
                 // If the password and confirm password do not match, show an error message
                 confirmPassword.setError("Passwords do not match");
-            } else {
+                return;
+            }
+
+
+            sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+
+            // Check if the username already exists
+            if (sharedPreferences.contains(usernameText)) {
+                // If the username already exists, show an error message
+                username.setError("Username already exists");
+                return;
+            }
+
                 // If the username and password are valid, show a success message
                 username.setError(null);
                 password.setError(null);
@@ -52,15 +77,44 @@ public class RegisterActivity extends AppCompatActivity {
                 // show register success message
                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
                 // store the username and password in shared preferences
-                SharedPreferences sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+
                 // put the username and password in shared preferences
                 editor.putString(usernameText,passwordText);
                 editor.apply();
                 // go to the login activity
                 finish();
 
-            }
         });
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if(inputMethodManager.isAcceptingText()){
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(),
+                    0
+            );
+        }
+    }
+
+    public void setupUI(View view) {
+
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener((v, event) -> {
+                hideSoftKeyboard(RegisterActivity.this);
+                return false;
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
     }
 }
