@@ -6,4 +6,7 @@
     <string name="register_button">Register</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register_button_text">Register</string>
+    <string name="game_menu_text">Game menu</string>
+    <string name="private_score_text">Private score</string>
+    <string name="global_score_text">Global score</string>
 </resources>

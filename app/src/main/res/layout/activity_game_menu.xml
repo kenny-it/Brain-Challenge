@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".GameMenuActivity">
+
+    <!--    Stage 1-->
+
+
+    <!--    Stage 2-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage1" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--    Stage 3-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage2" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="214dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage3" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--    Stage 4-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="217dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage4" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--    Stage 5-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_5"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="394dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage5" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--    Stage 6-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_6"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="398dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_6"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage6" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!--    Stage 7-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_7"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="560dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_7"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage7" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!--    Stage 8-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_stage_8"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="562dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="8dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageView_8"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/stage8" />
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>
