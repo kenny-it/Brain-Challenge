@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.speed.brainchallenge.utils.Constant;
+
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
            //
-            SharedPreferences users = getSharedPreferences("users", MODE_PRIVATE);
+            SharedPreferences users = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
             String storedPassword = users.getString(usernameText, null);
             if (passwordText.equals(storedPassword)) {
                 // If the username and password are valid, show a success message

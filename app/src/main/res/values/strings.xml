@@ -12,4 +12,9 @@
     <string name="stage_three_edit_text">Type answer here.</string>
     <string name="submit">Submit</string>
     <string name="stage_no_3">Stage No.3</string>
+    <string name="back_to_menu">Back to Menu</string>
+    <string name="stage_no_4">Stage No.4</string>
+    <string name="turn_off_the_light">Turn off the light</string>
+    <string name="light_intensity">"Light intensity: "</string>
+    <string name="light_intensity_0">Light intensity：0</string>
 </resources>

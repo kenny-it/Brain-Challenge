@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.speed.brainchallenge.utils.Constant;
 
 import java.util.Objects;
 
@@ -60,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 
-            sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
+            sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
             editor = sharedPreferences.edit();
 
             // Check if the username already exists
@@ -84,6 +86,14 @@ public class RegisterActivity extends AppCompatActivity {
                 // go to the login activity
                 finish();
 
+        });
+
+        // Set the on click listener for the back button
+        // set onclick listener for back button
+        ImageButton backBtn = findViewById(R.id.backButton);
+        backBtn.setOnClickListener(v -> {
+            // go to the login activity
+            finish();
         });
     }
 

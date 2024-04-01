@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,13 +27,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.speed.brainchallenge.GameMenuActivity;
 import com.speed.brainchallenge.MainActivity;
 import com.speed.brainchallenge.R;
+import com.speed.brainchallenge.stageFour.StageFourActivity;
+import com.speed.brainchallenge.utils.Constant;
 
 import java.util.Random;
 
 public class StageThreeActivity extends AppCompatActivity implements SensorEventListener, View.OnClickListener {
-    private final String TAG = "Stage Three";
 
     private String username;
     private Boolean isHorizontal = null;
@@ -45,6 +48,8 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
 
     private Button btnSubmit;
 
+    private SensorManager sensorManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)   {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,9 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton backBtn = findViewById(R.id.backButton);
+        backBtn.setOnClickListener(this);
 
         // get username from intent
         username = getIntent().getStringExtra("username");
@@ -83,10 +91,7 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
 
     private void initSensor(Context context) {
         // get Sensor object
-        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
-
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
 
     public void init(Context context) {
@@ -105,10 +110,10 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
 
         // Calculate the angle
         double newAngle = Math.toDegrees(Math.acos(z / Math.sqrt(x * x + y * y + z * z)));
-        // if the angle is less than 10, then the phone is horizontal
+        // if the angle is less than 45, then the phone is horizontal
         // else is vertical
         if (isHorizontal == null) {
-            if (newAngle < 10) {
+            if (newAngle < 45) {
                 isHorizontal = true;
             } else {
                 isHorizontal = false;
@@ -163,6 +168,13 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
             timer.stop();
             // Check the input answer is correct
             doChecking();
+            return;
+        }
+
+        if (v.getId() == R.id.backButton) {
+            // go back to main menu
+            Intent intent = new Intent(this, GameMenuActivity.class).putExtra(Constant.USERS, username);
+            startActivity(intent);
         }
 
     }
@@ -187,10 +199,10 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         // calculate score
         int score = calculateScore(time);
         // Save the records on sharepreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("StageThree_" + username, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.STAGETHREE + username, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("score", score);
-        editor.putLong("time", time);
+        editor.putInt(Constant.SCORE, score);
+        editor.putLong(Constant.TIME, time);
         editor.apply();
 
         // Show dialog and go to next stage
@@ -199,8 +211,8 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         dialog.setMessage("You have completed the stage 3 with score " + score);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
-            //Intent intent = new Intent(this, StageFourActivity.class).putExtra("username", username);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageFourActivity.class).putExtra("username", username);
+            startActivity(intent);
         });
         dialog.setNegativeButton("Back to Menu", (dialog1, which) -> {
             // go back to main menu
@@ -228,4 +240,17 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
 
         return score;
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
 }

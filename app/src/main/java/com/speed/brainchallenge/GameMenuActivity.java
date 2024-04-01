@@ -2,6 +2,7 @@ package com.speed.brainchallenge;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,7 +12,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
+import com.speed.brainchallenge.stageFour.StageFourActivity;
 import com.speed.brainchallenge.stagethree.StageThreeActivity;
+import com.speed.brainchallenge.utils.Constant;
 
 public class GameMenuActivity extends AppCompatActivity {
 
@@ -31,6 +34,14 @@ public class GameMenuActivity extends AppCompatActivity {
         // Get the username from the intent
         username = getIntent().getStringExtra("username");
 
+        // set onclick listener for back button
+        ImageButton backBtn = findViewById(R.id.backButton);
+        backBtn.setOnClickListener(v -> {
+            // go back to the main activity
+            Intent intent = new Intent(this, MainActivity.class).putExtra(Constant.USERS, username);
+            startActivity(intent);
+        });
+
         MaterialCardView card_stage_1 = findViewById(R.id.card_stage_1);
         MaterialCardView card_stage_2 = findViewById(R.id.card_stage_2);
         MaterialCardView card_stage_3 = findViewById(R.id.card_stage_3);
@@ -41,61 +52,54 @@ public class GameMenuActivity extends AppCompatActivity {
         MaterialCardView card_stage_8 = findViewById(R.id.card_stage_8);
 
 
-        card_stage_1.setOnLongClickListener(v -> {
+        card_stage_1.setOnClickListener(v -> {
             // go to stage 1 and pass the username
             // Intent intent = new Intent(this, StageActivityOne.class).putExtra("username", username);
             //startActivity(intent);
             Toast.makeText(this, "Stage 1", Toast.LENGTH_SHORT).show();
-            return true;
         });
 
-        card_stage_2.setOnLongClickListener(v -> {
+        card_stage_2.setOnClickListener(v -> {
             // go to stage 2
             // Intent intent = new Intent(this, StageActivityTwo.class).putExtra("username", username);
             //startActivity(intent);
-            return true;
         });
 
-        card_stage_3.setOnLongClickListener(v -> {
+        card_stage_3.setOnClickListener(v -> {
             // go to stage 3
             Intent intent = new Intent(this, StageThreeActivity.class).putExtra("username", username);
             startActivity(intent);
-            return true;
         });
 
-        card_stage_4.setOnLongClickListener(v -> {
+        card_stage_4.setOnClickListener(v -> {
             // go to stage 4
-            // Intent intent = new Intent(this, CarGameActivity.class).putExtra("username", username);
-            //startActivity(intent);
-            return true;
+           Intent intent = new Intent(this, StageFourActivity.class).putExtra("username", username);
+            startActivity(intent);
         });
 
-        card_stage_5.setOnLongClickListener(v -> {
+        card_stage_5.setOnClickListener(v -> {
             // go to stage 5
             // Intent intent = new Intent(this, StageActivityFive.class).putExtra("username", username);
             //startActivity(intent);
-            return true;
         });
 
-        card_stage_6.setOnLongClickListener(v -> {
+        card_stage_6.setOnClickListener(v -> {
             // go to stage 6
             // Intent intent = new Intent(this, StageActivitySix.class).putExtra("username", username);
             //startActivity(intent);
-            return true;
         });
 
-        card_stage_7.setOnLongClickListener(v -> {
+        card_stage_7.setOnClickListener(v -> {
             // go to stage 7
             // Intent intent = new Intent(this, StageActivitySeven.class).putExtra("username", username);
             //startActivity(intent);
-            return true;
         });
 
-        card_stage_8.setOnLongClickListener(v -> {
+        card_stage_8.setOnClickListener(v -> {
             // go to stage 8
             // Intent intent = new Intent(this, StageActivityEight.class).putExtra("username", username);
             //startActivity(intent);
-            return true;
+
         });
 
     }

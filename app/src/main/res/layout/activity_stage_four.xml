@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFD700"
+    tools:context=".stageFour.StageFourActivity">
+
+    <TextView
+        android:id="@+id/tv_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="129dp"
+        android:padding="5dp"
+        android:text="@string/light_intensity_0"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:background="@null"
+        android:src="@drawable/back" />
+
+    <Chronometer
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="99dp"
+        android:text="@string/stage_no_4"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <ImageView
+        android:id="@+id/light_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView"
+        android:layout_marginTop="53dp"
+        android:src="@drawable/lighton" />
+
+   <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/lightSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/light_img"
+        android:layout_alignBottom="@+id/light_img"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="161dp"
+        android:layout_marginBottom="89dp"
+        android:checked="true"
+        android:layoutDirection="rtl"
+        android:padding="20dp"
+        android:rotation="90"
+        android:text="" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/turn_off_the_light"
+        android:textSize="26sp"
+        android:layout_below="@+id/light_img"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>
