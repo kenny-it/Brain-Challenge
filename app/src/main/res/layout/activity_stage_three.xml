@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".stagethree.StageThreeActivity">
+    <Chronometer
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="99dp"
+        android:text="@string/stage_no_3"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/textViewAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="261dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="89"
+        android:textSize="26dp" />
+
+    <EditText
+        android:id="@+id/editTextAnswer"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/textViewAnswer"
+        android:layout_marginBottom="-117dp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/stage_three_edit_text"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/StageThreeSubmitBtn"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_centerHorizontal="true"
+        android:paddingHorizontal="60dp"
+        android:text="@string/submit" />
+
+
+</RelativeLayout>

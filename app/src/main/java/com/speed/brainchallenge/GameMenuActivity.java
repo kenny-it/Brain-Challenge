@@ -11,8 +11,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
+import com.speed.brainchallenge.stagethree.StageThreeActivity;
 
 public class GameMenuActivity extends AppCompatActivity {
+
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,9 @@ public class GameMenuActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Get the username from the intent
+        username = getIntent().getStringExtra("username");
+
         MaterialCardView card_stage_1 = findViewById(R.id.card_stage_1);
         MaterialCardView card_stage_2 = findViewById(R.id.card_stage_2);
         MaterialCardView card_stage_3 = findViewById(R.id.card_stage_3);
@@ -36,51 +42,59 @@ public class GameMenuActivity extends AppCompatActivity {
 
 
         card_stage_1.setOnLongClickListener(v -> {
-            // go to stage 1
-            //startActivity(new Intent(StageActivityOne.class,this));
+            // go to stage 1 and pass the username
+            // Intent intent = new Intent(this, StageActivityOne.class).putExtra("username", username);
+            //startActivity(intent);
             Toast.makeText(this, "Stage 1", Toast.LENGTH_SHORT).show();
             return true;
         });
 
         card_stage_2.setOnLongClickListener(v -> {
             // go to stage 2
-            //startActivity(new Intent(StageActivityTwo.class,this));
+            // Intent intent = new Intent(this, StageActivityTwo.class).putExtra("username", username);
+            //startActivity(intent);
             return true;
         });
 
         card_stage_3.setOnLongClickListener(v -> {
             // go to stage 3
-            //startActivity(new Intent(StageActivityThree.class,this));
+            Intent intent = new Intent(this, StageThreeActivity.class).putExtra("username", username);
+            startActivity(intent);
             return true;
         });
 
         card_stage_4.setOnLongClickListener(v -> {
             // go to stage 4
-            //startActivity(new Intent(StageActivityFour.class,this));
+            // Intent intent = new Intent(this, CarGameActivity.class).putExtra("username", username);
+            //startActivity(intent);
             return true;
         });
 
         card_stage_5.setOnLongClickListener(v -> {
             // go to stage 5
-            //startActivity(new Intent(StageActivityFive.class,this));
+            // Intent intent = new Intent(this, StageActivityFive.class).putExtra("username", username);
+            //startActivity(intent);
             return true;
         });
 
         card_stage_6.setOnLongClickListener(v -> {
             // go to stage 6
-            //startActivity(new Intent(StageActivitySix.class,this));
+            // Intent intent = new Intent(this, StageActivitySix.class).putExtra("username", username);
+            //startActivity(intent);
             return true;
         });
 
         card_stage_7.setOnLongClickListener(v -> {
             // go to stage 7
-            //startActivity(new Intent(StageActivitySeven.class,this));
+            // Intent intent = new Intent(this, StageActivitySeven.class).putExtra("username", username);
+            //startActivity(intent);
             return true;
         });
 
         card_stage_8.setOnLongClickListener(v -> {
             // go to stage 8
-            //startActivity(new Intent(StageActivityEight.class,this));
+            // Intent intent = new Intent(this, StageActivityEight.class).putExtra("username", username);
+            //startActivity(intent);
             return true;
         });
 

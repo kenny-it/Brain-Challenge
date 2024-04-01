@@ -10,6 +10,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class GlobalScoreActivity extends AppCompatActivity {
 
+    private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +22,8 @@ public class GlobalScoreActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Get the username from the intent
+        username = getIntent().getStringExtra("username");
     }
 }

@@ -52,8 +52,9 @@ public class LoginActivity extends AppCompatActivity {
                 password.setError(null);
                 // show login success message
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                // go to the main activity
-                startActivity(new Intent(this, MainActivity.class));
+                // go to the main activity and pass username to the main activity
+                Intent intent = new Intent(this, MainActivity.class).putExtra("username", usernameText);
+                startActivity(intent);
             } else {
                 // If the username and password are invalid, show an error message
                 username.setError("Invalid username");
