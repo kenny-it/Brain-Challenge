@@ -8,6 +8,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.speed.brainchallenge.utils.Constant;
+
 public class GlobalScoreActivity extends AppCompatActivity {
 
     private String username;
@@ -24,6 +26,6 @@ public class GlobalScoreActivity extends AppCompatActivity {
         });
 
         // Get the username from the intent
-        username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra(Constant.USERS);
     }
 }

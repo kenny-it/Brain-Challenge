@@ -17,4 +17,5 @@
     <string name="turn_off_the_light">Turn off the light</string>
     <string name="light_intensity">"Light intensity: "</string>
     <string name="light_intensity_0">Light intensity：0</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -65,7 +65,7 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         backBtn.setOnClickListener(this);
 
         // get username from intent
-        username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra(Constant.USERS);
 
         init(this);
         initSensor(this);
