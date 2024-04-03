@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         setupUI(findViewById(R.id.parent));
 
+        //Hello world
         // Get Username and Password
         TextInputEditText username = findViewById(R.id.username);
         TextInputEditText password = findViewById(R.id.password);
