@@ -1,6 +1,7 @@
 package com.speed.brainchallenge;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -32,13 +33,14 @@ public class GameMenuActivity extends AppCompatActivity {
         });
 
         // Get the username from the intent
-        username = getIntent().getStringExtra(Constant.USERS);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
 
         // set onclick listener for back button
         ImageButton backBtn = findViewById(R.id.backButton);
         backBtn.setOnClickListener(v -> {
             // go back to the main activity
-            Intent intent = new Intent(this, MainActivity.class).putExtra(Constant.USERS, username);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
 
@@ -54,50 +56,50 @@ public class GameMenuActivity extends AppCompatActivity {
 
         card_stage_1.setOnClickListener(v -> {
             // go to stage 1 and pass the username
-            // Intent intent = new Intent(this, StageActivityOne.class).putExtra("username", username);
+            // Intent intent = new Intent(this, StageActivityOne.class);
             //startActivity(intent);
             Toast.makeText(this, "Stage 1", Toast.LENGTH_SHORT).show();
         });
 
         card_stage_2.setOnClickListener(v -> {
             // go to stage 2
-            // Intent intent = new Intent(this, StageActivityTwo.class).putExtra("username", username);
+            // Intent intent = new Intent(this, StageActivityTwo.class);
             //startActivity(intent);
         });
 
         card_stage_3.setOnClickListener(v -> {
             // go to stage 3
-            Intent intent = new Intent(this, StageThreeActivity.class).putExtra(Constant.USERS, username);
+            Intent intent = new Intent(this, StageThreeActivity.class);
             startActivity(intent);
         });
 
         card_stage_4.setOnClickListener(v -> {
             // go to stage 4
-           Intent intent = new Intent(this, StageFourActivity.class).putExtra(Constant.USERS, username);
+           Intent intent = new Intent(this, StageFourActivity.class);
             startActivity(intent);
         });
 
         card_stage_5.setOnClickListener(v -> {
             // go to stage 5
-            // Intent intent = new Intent(this, StageActivityFive.class).putExtra(Constant.USERS, username);
+            // Intent intent = new Intent(this, StageActivityFive.class);
             //startActivity(intent);
         });
 
         card_stage_6.setOnClickListener(v -> {
             // go to stage 6
-            // Intent intent = new Intent(this, StageActivitySix.class).putExtra(Constant.USERS, username);
+            // Intent intent = new Intent(this, StageActivitySix.class);
             //startActivity(intent);
         });
 
         card_stage_7.setOnClickListener(v -> {
             // go to stage 7
-            // Intent intent = new Intent(this, StageActivitySeven.class).putExtra(Constant.USERS, username);
+            // Intent intent = new Intent(this, StageActivitySeven.class);
             //startActivity(intent);
         });
 
         card_stage_8.setOnClickListener(v -> {
             // go to stage 8
-            // Intent intent = new Intent(this, StageActivityEight.class).putExtra(Constant.USERS, username);
+            // Intent intent = new Intent(this, StageActivityEight.class);
             //startActivity(intent);
 
         });
