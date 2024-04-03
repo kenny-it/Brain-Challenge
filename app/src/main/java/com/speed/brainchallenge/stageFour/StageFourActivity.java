@@ -52,8 +52,9 @@ public class StageFourActivity extends AppCompatActivity implements ImageButton.
             return insets;
         });
 
-        // get username from intent
-        username = getIntent().getStringExtra(Constant.USERS);
+        // Get the username
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
         // set onclick listener for back button
         ImageButton backBtn = findViewById(R.id.backButton);
         backBtn.setOnClickListener(this);
