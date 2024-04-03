@@ -31,8 +31,9 @@ public class PrivateScoreActivity extends AppCompatActivity {
         });
 
         // Get the username from the intent
-        username = getIntent().getStringExtra(Constant.USERS);
-
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
+        
         // Set the back button click listener
         ImageButton backBtn = (ImageButton)findViewById(R.id.backButton);
         backBtn.setOnClickListener(v -> {
