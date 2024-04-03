@@ -1,6 +1,7 @@
 package com.speed.brainchallenge;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Get the username from the intent
-        username = getIntent().getStringExtra(Constant.USERS);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
 
         MaterialButton btnGameMenu = findViewById(R.id.btnGameMenu);
         MaterialButton btnPrivateScore = findViewById(R.id.btnPrivateScore);
@@ -38,19 +40,19 @@ public class MainActivity extends AppCompatActivity {
 
         btnGameMenu.setOnClickListener(v -> {
             // Start GameMenuActivity and pass the username
-            Intent intent = new Intent(this, GameMenuActivity.class).putExtra(Constant.USERS, username);
+            Intent intent = new Intent(this, GameMenuActivity.class);
             startActivity(intent);
         });
 
         btnPrivateScore.setOnClickListener(v -> {
             // Start PrivateScoreActivity and pass the username
-            Intent intent = new Intent(this, PrivateScoreActivity.class).putExtra(Constant.USERS, username);
+            Intent intent = new Intent(this, PrivateScoreActivity.class);
             startActivity(intent);
         });
 
         btnGlobalScore.setOnClickListener(v -> {
             // Start GlobalScoreActivity and pass the username
-            Intent intent = new Intent(this, GlobalScoreActivity.class).putExtra(Constant.USERS, username);
+            Intent intent = new Intent(this, GlobalScoreActivity.class);
             startActivity(intent);
         });
 
