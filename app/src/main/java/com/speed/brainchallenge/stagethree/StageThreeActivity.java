@@ -64,8 +64,9 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         ImageButton backBtn = findViewById(R.id.backButton);
         backBtn.setOnClickListener(this);
 
-        // get username from intent
-        username = getIntent().getStringExtra(Constant.USERS);
+       // Get the username
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
 
         init(this);
         initSensor(this);
@@ -173,7 +174,7 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
 
         if (v.getId() == R.id.backButton) {
             // go back to main menu
-            Intent intent = new Intent(this, GameMenuActivity.class).putExtra(Constant.USERS, username);
+            Intent intent = new Intent(this, GameMenuActivity.class);
             startActivity(intent);
         }
 
@@ -211,7 +212,7 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         dialog.setMessage("You have completed the stage 3 with score " + score);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
-            Intent intent = new Intent(this, StageFourActivity.class).putExtra("username", username);
+            Intent intent = new Intent(this, StageFourActivity.class);
             startActivity(intent);
         });
         dialog.setNegativeButton("Back to Menu", (dialog1, which) -> {
