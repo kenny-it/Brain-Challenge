@@ -1,7 +1,7 @@
 package com.speed.brainchallenge;
 
 import android.os.Bundle;
-
+import android.content.SharedPreferences;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -26,6 +26,7 @@ public class GlobalScoreActivity extends AppCompatActivity {
         });
 
         // Get the username from the intent
-        username = getIntent().getStringExtra(Constant.USERS);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
     }
 }
