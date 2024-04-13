@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-           //
+            // Get the stored password for the username
             SharedPreferences users = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
             String storedPassword = users.getString(usernameText, null);
             if (passwordText.equals(storedPassword)) {

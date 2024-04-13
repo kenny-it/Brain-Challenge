@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,4 +8,123 @@
     android:background="@color/background_color"
     tools:context=".GlobalScoreActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:src="@drawable/back" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:background="@color/background_color"
+        app:tabMode="scrollable"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 1"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 2"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 3"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 4"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 5" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 6"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 7"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_stage_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stage 8"
+            />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabLayout"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/rank"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Rank" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Username" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Score" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Time(mm:ss)" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout"
+        android:clipToPadding="false" />
+
+</RelativeLayout>
