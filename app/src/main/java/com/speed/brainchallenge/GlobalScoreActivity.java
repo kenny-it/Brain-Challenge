@@ -9,6 +9,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -46,6 +47,11 @@ public class GlobalScoreActivity extends AppCompatActivity implements View.OnCli
         // Get the username from the intent
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
         username = sharedPreferences.getString(Constant.CURRENTUSER, "");
+
+        // set onclick listener for back button
+        ImageButton backBtn = findViewById(R.id.backButton);
+        backBtn.setOnClickListener(this);
+
 
         // Get the tabLayout
         TabLayout tabLayout = findViewById(R.id.tabLayout);

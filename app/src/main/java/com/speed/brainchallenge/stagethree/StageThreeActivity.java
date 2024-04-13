@@ -47,8 +47,12 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
     private Chronometer timer;
 
     private Button btnSubmit;
+    private TextView textViewNotification;
 
     private SensorManager sensorManager;
+
+    private int[] numbers = new int[2];
+    private int currentStep = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)   {
@@ -63,6 +67,8 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
 
         ImageButton backBtn = findViewById(R.id.backButton);
         backBtn.setOnClickListener(this);
+
+        textViewNotification = findViewById(R.id.textViewNotification);
 
        // Get the username
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
@@ -98,9 +104,14 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
     public void init(Context context) {
         // get Answer text view
         answerView = findViewById(R.id.textViewAnswer);
-        // generate a random 4-digit number
-        Random random = new Random();
-        answer = String.format("%04d",random.nextInt(10000));
+        // generate the number
+        generateNumber();
+        answer = numbers[currentStep] + "";
+    }
+
+    public void generateNumber() {
+        int number = (int) (Math.random() * 1000);
+        numbers[currentStep] = number;
     }
 
     @Override
@@ -165,8 +176,6 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.StageThreeSubmitBtn) {
-            // stop timer
-            timer.stop();
             // Check the input answer is correct
             doChecking();
             return;
@@ -184,7 +193,6 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         String input = inputAnswer.getText().toString();
         if (input.isEmpty()) {
             Toast.makeText(this, "Please enter the answer", Toast.LENGTH_SHORT).show();
-            timer.start();
             return;
         }
 
@@ -192,6 +200,31 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
             Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // if the answer is correct, then go to next step
+        if (currentStep == 0) {
+            currentStep = 1;
+            generateNumber();
+            // Generate new number for second input
+            answer = numbers[currentStep] + "";
+            answerView.setText("");
+            inputAnswer.setText("");
+            textViewNotification.setText(R.string.second_input_notification);
+            return;
+        }
+
+        if (currentStep == 1) {
+            // if the second input is correct, then ask the user to calculate the numbers
+            currentStep = 2;
+            answer = (numbers[0] + numbers[1]) + "";
+            // hidden the answer view
+            answerView.setVisibility(View.INVISIBLE);
+            inputAnswer.setText("");
+            textViewNotification.setText(R.string.result_input_notification);
+            return;
+        }
+
+
         // if answer is correct
         Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
         // get the time in seconds
@@ -205,6 +238,9 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         editor.putInt(Constant.SCORE, score);
         editor.putLong(Constant.TIME, time);
         editor.apply();
+
+        // stop timer
+        timer.stop();
 
         // Show dialog and go to next stage
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);

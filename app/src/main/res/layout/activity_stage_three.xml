@@ -48,6 +48,16 @@
         android:text="89"
         android:textSize="26dp" />
 
+    <TextView
+        android:id="@+id/textViewNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/editTextAnswer"
+        android:layout_marginBottom="11dp"
+        android:paddingHorizontal="16dp"
+        android:text="@string/first_input_notification" />
+
     <EditText
         android:id="@+id/editTextAnswer"
         android:layout_width="200dp"

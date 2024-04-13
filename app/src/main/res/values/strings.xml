@@ -9,7 +9,7 @@
     <string name="game_menu_text">Game menu</string>
     <string name="private_score_text">Private score</string>
     <string name="global_score_text">Global score</string>
-    <string name="stage_three_edit_text">Type answer here.</string>
+    <string name="stage_three_edit_text">Enter number here.</string>
     <string name="submit">Submit</string>
     <string name="stage_no_3">Stage No.3</string>
     <string name="back_to_menu">Back to Menu</string>
@@ -18,4 +18,7 @@
     <string name="light_intensity">"Light intensity: "</string>
     <string name="light_intensity_0">Light intensity：0</string>
     <string name="logout">Logout</string>
+    <string name="first_input_notification">Please input the first number you find!</string>
+    <string name="second_input_notification">Please input the second number you find!</string>
+    <string name="result_input_notification">Now, calculate the sum of the previous two numbers and enter the result.</string>
 </resources>
