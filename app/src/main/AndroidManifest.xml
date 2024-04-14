@@ -49,6 +49,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".StageActivitySeven"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
     </application>
 
 </manifest>

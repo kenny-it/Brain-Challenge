@@ -93,8 +93,8 @@ public class GameMenuActivity extends AppCompatActivity {
 
         card_stage_7.setOnClickListener(v -> {
             // go to stage 7
-            // Intent intent = new Intent(this, StageActivitySeven.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageActivitySeven.class);
+            startActivity(intent);
         });
 
         card_stage_8.setOnClickListener(v -> {
