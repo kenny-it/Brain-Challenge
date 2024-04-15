@@ -10,7 +10,7 @@ public class SevenGameView extends SurfaceView implements  Runnable {
     private Thread thread;
     private boolean isRunning;
     private int screenX,screenY;
-    private float RatioX,RatioY; //the size for the screen
+    public static float RatioX,RatioY; //the size for the screen
     private Paint paint;
     private Background background1, background2;
     public SevenGameView(Context context, int screenX, int screenY) {
@@ -18,6 +18,9 @@ public class SevenGameView extends SurfaceView implements  Runnable {
 
         this.screenX = screenX;
         this.screenY = screenY;
+        //Adaptive part: change the numbers to different size of the screen.
+        RatioX = 1920f/ screenX;
+        RatioY = 1080f / screenY;
 
         background1 = new Background(screenX,screenY,getResources());
         background2 = new Background(screenX,screenY,getResources());
@@ -52,8 +55,8 @@ public class SevenGameView extends SurfaceView implements  Runnable {
     }
     private void update(){
         //moving the background every 10 pixel
-        background1.x -= 10;
-        background2.x -= 10;
+        background1.x -= 10 * RatioX;
+        background2.x -= 10 * RatioY;
         //calculating whether the background has moved out of the screen. the left pixel plus with the right width of the background is the judgment.
         if(background1.x + background1.background.getWidth() <0){
             background1.x= screenX;
