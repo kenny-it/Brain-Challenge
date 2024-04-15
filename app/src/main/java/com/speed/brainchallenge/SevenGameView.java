@@ -3,6 +3,8 @@ package com.speed.brainchallenge;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 
 public class SevenGameView extends SurfaceView implements  Runnable {
@@ -12,10 +14,12 @@ public class SevenGameView extends SurfaceView implements  Runnable {
     private int screenX,screenY;
     public static float RatioX,RatioY; //the size for the screen
     private Paint paint;
+    //Flight()
+    private Flight flight;
     private Background background1, background2;
     public SevenGameView(Context context, int screenX, int screenY) {
         super(context);
-
+        Log.d("screenX", String.valueOf(screenX));
         this.screenX = screenX;
         this.screenY = screenY;
         //Adaptive part: change the numbers to different size of the screen.
@@ -24,6 +28,7 @@ public class SevenGameView extends SurfaceView implements  Runnable {
 
         background1 = new Background(screenX,screenY,getResources());
         background2 = new Background(screenX,screenY,getResources());
+        flight = new Flight(screenY,getResources());
         background2.x = screenX;
 
         Paint paint = new Paint();
@@ -44,6 +49,24 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             e.printStackTrace();
         }
     }
+    //controller of the flight
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                //the judgment for checking whether users' touch is on the left of the screen
+                if (event.getX()<screenX/2){
+                    flight.isGoingUp = true;
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                flight.isGoingUp = false;
+                break;
+        }
+        return true;
+    }
+
     @Override
     public void run() {
         //while will always running when the game running, ensure that the background image will keeping moving.
@@ -64,13 +87,27 @@ public class SevenGameView extends SurfaceView implements  Runnable {
         if(background2.x + background2.background.getWidth() <0){
             background2.x= screenX;
         }
+        //calculating the height of the flight
+        if(flight.isGoingUp)
+            flight.y -= (int) (30*RatioY);
+        else
+            flight.y += (int) (30*RatioY);
+        if (flight.y <0)
+            flight.y = 0;
+
+        if(flight.y > screenY - flight.height)
+            flight.y = screenY - flight.height;
     }
     private void draw(){
         //canvas initializing
         if(getHolder().getSurface().isValid()){
             Canvas canvas = getHolder().lockCanvas();
+            //Background 1
             canvas.drawBitmap(background1.background,background1.x,background1.y,paint);
+            //Background 2
             canvas.drawBitmap(background2.background,background2.x,background2.y,paint);
+            //Flight
+            canvas.drawBitmap(flight.getFlight(),flight.x,flight.y,paint);
 
             getHolder().unlockCanvasAndPost(canvas);
 
