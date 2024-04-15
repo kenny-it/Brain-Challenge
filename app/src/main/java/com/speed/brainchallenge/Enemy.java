@@ -25,8 +25,8 @@ public class Enemy {
         width = enemy1.getWidth();
         height = enemy1.getHeight();
 
-        width /= 6;
-        height /= 6;
+        width /= 4;
+        height /= 4;
 
         width = (int) (width*RatioX);
         height = (int)(height*RatioY);
