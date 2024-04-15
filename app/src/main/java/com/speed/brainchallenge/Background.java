@@ -9,7 +9,7 @@ public class Background {
     Bitmap background; //for processing motion picture
     Background (int screenX, int screenY, Resources res){
         //import the background and decoded it as Bitmap resource background
-        background = BitmapFactory.decodeResource(res,R.drawable.blackhole);
+        background = BitmapFactory.decodeResource(res,R.drawable.mountain);
         background = Bitmap.createScaledBitmap(background,screenX,screenY,false);
         //ScreenX: the width after background scaling, ScreenY: the height after background scaling.
 
