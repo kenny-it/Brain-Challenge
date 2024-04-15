@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SevenGameView extends SurfaceView implements  Runnable {
     //Create new Thread when the game started
     private Thread thread;
@@ -16,7 +19,12 @@ public class SevenGameView extends SurfaceView implements  Runnable {
     private Paint paint;
     //Flight()
     private Flight flight;
+    private List<Bullet> bullets;
     private Background background1, background2;
+
+
+
+
     public SevenGameView(Context context, int screenX, int screenY) {
         super(context);
         Log.d("screenX", String.valueOf(screenX));
@@ -28,7 +36,8 @@ public class SevenGameView extends SurfaceView implements  Runnable {
 
         background1 = new Background(screenX,screenY,getResources());
         background2 = new Background(screenX,screenY,getResources());
-        flight = new Flight(screenY,getResources());
+        flight = new Flight(this,screenY,getResources());
+        bullets = new ArrayList<>();
         background2.x = screenX;
 
         Paint paint = new Paint();
@@ -62,6 +71,10 @@ public class SevenGameView extends SurfaceView implements  Runnable {
                 break;
             case MotionEvent.ACTION_UP:
                 flight.isGoingUp = false;
+                //the judgment for checking whether users' touch is on the right of the screen
+                if(event.getX()>screenX/2){
+                    flight.isShooting++;
+                }
                 break;
         }
         return true;
@@ -78,8 +91,8 @@ public class SevenGameView extends SurfaceView implements  Runnable {
     }
     private void update(){
         //moving the background every 10 pixel
-        background1.x -= 10 * RatioX;
-        background2.x -= 10 * RatioY;
+        background1.x -= 10;  //* RatioX;
+        background2.x -= 10;  //* RatioY;
         //calculating whether the background has moved out of the screen. the left pixel plus with the right width of the background is the judgment.
         if(background1.x + background1.background.getWidth() <0){
             background1.x= screenX;
@@ -97,7 +110,25 @@ public class SevenGameView extends SurfaceView implements  Runnable {
 
         if(flight.y > screenY - flight.height)
             flight.y = screenY - flight.height;
+
+        List <Bullet> trash = new ArrayList<>();
+
+        for (Bullet bullet : bullets){
+            //judgment of bullet when it fly out of the screen
+            if (bullet.x>screenX)
+                trash.add(bullet);
+
+            bullet.x += 50 * RatioX;
+        }
+
+        for (Bullet bullet : trash)
+            bullets.remove(bullet);
+
     }
+
+
+
+
     private void draw(){
         //canvas initializing
         if(getHolder().getSurface().isValid()){
@@ -108,6 +139,10 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             canvas.drawBitmap(background2.background,background2.x,background2.y,paint);
             //Flight
             canvas.drawBitmap(flight.getFlight(),flight.x,flight.y,paint);
+
+            //Bullet
+            for (Bullet bullet : bullets)
+                canvas.drawBitmap(bullet.bullet,bullet.x,bullet.y,paint);
 
             getHolder().unlockCanvasAndPost(canvas);
 
@@ -122,4 +157,10 @@ public class SevenGameView extends SurfaceView implements  Runnable {
 
     }
 
+    public void newBullet() {
+        Bullet bullet = new Bullet(getResources());
+        bullet.x = flight.x + flight.width;
+        bullet.y = flight.y + (flight.height/2);
+        bullets.add(bullet);
+    }
 }
