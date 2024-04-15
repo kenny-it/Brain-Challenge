@@ -3,23 +3,28 @@ package com.speed.brainchallenge;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SevenGameView extends SurfaceView implements  Runnable {
     //Create new Thread when the game started
     private Thread thread;
-    private boolean isRunning;
+    private boolean isRunning, isGameOver = false;
     private int screenX,screenY;
     public static float RatioX,RatioY; //the size for the screen
+    public Random random;
     private Paint paint;
     //Flight()
     private Flight flight;
     private List<Bullet> bullets;
+    //Enemy
+    private Enemy[] enemies;
     private Background background1, background2;
 
 
@@ -29,6 +34,7 @@ public class SevenGameView extends SurfaceView implements  Runnable {
         super(context);
         Log.d("screenX", String.valueOf(screenX));
         this.screenX = screenX;
+        Log.d("screenY", String.valueOf(screenY));
         this.screenY = screenY;
         //Adaptive part: change the numbers to different size of the screen.
         RatioX = 1920f/ screenX;
@@ -38,10 +44,22 @@ public class SevenGameView extends SurfaceView implements  Runnable {
         background2 = new Background(screenX,screenY,getResources());
         flight = new Flight(this,screenY,getResources());
         bullets = new ArrayList<>();
+        enemies = new Enemy[4];  // Totally 4 enemies on the screen
         background2.x = screenX;
 
         Paint paint = new Paint();
+
+
+        //Enemies started
+        for (int i = 0; i < 4; i++){
+            Enemy enemy = new Enemy(getResources());
+            enemies[i] = enemy;
+        }
     }
+
+
+
+
     //Resume() part aims to control the function using when the activity starts to run
     public void resume(){
         isRunning = true;
@@ -58,8 +76,10 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             e.printStackTrace();
         }
     }
-    //controller of the flight
 
+
+
+    //controller of the flight
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()){
@@ -80,6 +100,8 @@ public class SevenGameView extends SurfaceView implements  Runnable {
         return true;
     }
 
+
+
     @Override
     public void run() {
         //while will always running when the game running, ensure that the background image will keeping moving.
@@ -89,7 +111,11 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             sleep();
         }
     }
+
+
+    //Update function controlling the motivations of all the function including background, enemy and character etc.
     private void update(){
+        //Background
         //moving the background every 10 pixel
         background1.x -= 10;  //* RatioX;
         background2.x -= 10;  //* RatioY;
@@ -100,6 +126,9 @@ public class SevenGameView extends SurfaceView implements  Runnable {
         if(background2.x + background2.background.getWidth() <0){
             background2.x= screenX;
         }
+
+
+
         //calculating the height of the flight
         if(flight.isGoingUp)
             flight.y -= (int) (30*RatioY);
@@ -111,21 +140,66 @@ public class SevenGameView extends SurfaceView implements  Runnable {
         if(flight.y > screenY - flight.height)
             flight.y = screenY - flight.height;
 
-        List <Bullet> trash = new ArrayList<>();
 
+
+        //Bullet
+        List <Bullet> trash = new ArrayList<>();
         for (Bullet bullet : bullets){
             //judgment of bullet when it fly out of the screen
             if (bullet.x>screenX)
                 trash.add(bullet);
 
-            bullet.x += 50 * RatioX;
+            bullet.x += (int) (50 * RatioX);
+            //Judgment hit box
+            for (Enemy enemy : enemies){
+                if (Rect.intersects(enemy.getEnemyHitBoxShape(),bullet.getBulletHitBoxShape())){
+                    //The enemies will out of the screen
+                    enemy.x = -500;
+                    bullet.x = screenX+500;
+                    //The enemies will disappear when bullet hit them
+                    enemy.isShooting = true;
+                }
+            }
+
         }
 
         for (Bullet bullet : trash)
             bullets.remove(bullet);
 
-    }
 
+        //Enemies
+        for (Enemy enemy : enemies){
+            enemy.x -= enemy.enemySpeed;
+            //judgment that whether the Enemy stay out of the left screen. When the enemies run out of the screen, it will reset the X locations and speed up.
+            if (enemy.x + enemy.width <0){
+                //judgment that if enemies were not be shoot and still out of the screen.
+
+                if (!enemy.isShooting){
+                    isGameOver = true;
+                    return;
+                }
+
+                int max = (int) (30*RatioX); // Considering of Adaptive on each screen, the max number of the random speed use Ratio for the consideration.
+                Log.d("max", String.valueOf(max));
+                Random random = new Random();
+                enemy.enemySpeed = random.nextInt(max);// Set up the area of random values.
+                // the minimum speed of the enemy will be 10 pixels
+                if (enemy.enemySpeed < 10 * RatioX){
+                    enemy.enemySpeed = (int) (10 * RatioX);
+                }
+                enemy.x = screenX; // put the enemy to the right side.
+                enemy.y = random.nextInt(screenY - enemy.height);
+
+                enemy.isShooting = false;
+            }
+            // Making a hit boxes for both flight and enemies
+            if (Rect.intersects(enemy.getEnemyHitBoxShape(),flight.getFlightHitBoxShape())){
+                isGameOver = true;
+                return;
+            }
+        }
+
+    }
 
 
 
@@ -137,6 +211,19 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             canvas.drawBitmap(background1.background,background1.x,background1.y,paint);
             //Background 2
             canvas.drawBitmap(background2.background,background2.x,background2.y,paint);
+
+            //GameOver
+            if (isGameOver){
+                isRunning = false;
+                canvas.drawBitmap(flight.getDead(),flight.x,flight.y,paint);
+                getHolder().unlockCanvasAndPost(canvas);
+                return;
+            }
+            //Enemy
+            for (Enemy enemy : enemies){
+                canvas.drawBitmap(enemy.getEnemy(),enemy.x,enemy.y,paint);
+            }
+
             //Flight
             canvas.drawBitmap(flight.getFlight(),flight.x,flight.y,paint);
 

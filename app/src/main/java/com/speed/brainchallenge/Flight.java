@@ -6,12 +6,13 @@ import static com.speed.brainchallenge.SevenGameView.RatioY;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 public class Flight {
     public int isShooting = 0;
     boolean isGoingUp = false;
     int x,y,width,height,wingCounter=0,shootCounter = 1;
-    Bitmap flight1,flight2,shoot1,shoot2,shoot3,shoot4,shoot5;
+    Bitmap flight1,flight2,shoot1,shoot2,shoot3,shoot4,shoot5,dead;
     private final SevenGameView sevenGameView;
 
 
@@ -26,6 +27,7 @@ public class Flight {
         shoot3 = BitmapFactory.decodeResource(res,R.drawable.shoot3);
         shoot4 = BitmapFactory.decodeResource(res,R.drawable.shoot4);
         shoot5 = BitmapFactory.decodeResource(res,R.drawable.shoot5);
+        dead = BitmapFactory.decodeResource(res,R.drawable.dead);
 
         width = flight1.getWidth();
         //Log.d("width", String.valueOf(width));
@@ -49,6 +51,7 @@ public class Flight {
         shoot3 = Bitmap.createScaledBitmap(shoot3,width,height,false);
         shoot4 = Bitmap.createScaledBitmap(shoot4,width,height,false);
         shoot5 = Bitmap.createScaledBitmap(shoot5,width,height,false);
+        dead = Bitmap.createScaledBitmap(dead,width,height,false);
         // y for making sure that the flight stay in the middle of the screen
         y = screenY / 2;
         //64 is the value for keeping flight always stay in the left of the screen
@@ -91,4 +94,16 @@ public class Flight {
         wingCounter --;
         return flight2;
     }
+
+    // Create the hit box for the Flight
+    Rect getFlightHitBoxShape(){
+        //left up corner : (x,y); right down corner: (x+width,y+height)
+        return new Rect(x,y,x+width,y+height);
+    }
+
+    //Dead function
+    Bitmap getDead(){
+        return dead;
+    }
+
 }
