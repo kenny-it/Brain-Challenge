@@ -9,6 +9,8 @@ public class Constant {
     public static final String STAGEFOUR = "StageFour_";
     public static final String STAGEFIVE = "StageFive_";
     public static final String STAGESIX = "StageSix_";
+    public static final String STAGESEVEN = "StageSeven_";
+    public static final String STAGEEIGHT = "StageEight_";
     public static final String SCORE = "Score";
     public static final String TIME = "Time";
 }
