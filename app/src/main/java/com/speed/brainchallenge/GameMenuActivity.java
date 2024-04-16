@@ -58,16 +58,15 @@ public class GameMenuActivity extends AppCompatActivity {
 
 
         card_stage_1.setOnClickListener(v -> {
-            // go to stage 1 and pass the username
-            // Intent intent = new Intent(this, StageActivityOne.class);
-            //startActivity(intent);
-            Toast.makeText(this, "Stage 1", Toast.LENGTH_SHORT).show();
+            // go to stage 1
+            Intent intent = new Intent(this, StageOneActivity.class);
+            startActivity(intent);
         });
 
         card_stage_2.setOnClickListener(v -> {
             // go to stage 2
-            // Intent intent = new Intent(this, StageActivityTwo.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageTwoActivity.class);
+            startActivity(intent);
         });
 
         card_stage_3.setOnClickListener(v -> {
