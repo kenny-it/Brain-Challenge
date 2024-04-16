@@ -23,13 +23,19 @@
             android:name=".stageTwo.StageTwoActivity"
             android:exported="false" />
         <activity
+            android:name=".stagethree.StageThreeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".stageFour.StageFourActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".stagethree.StageThreeActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:name=".stageFive.StageFiveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".stageSix.StageSixActivity"
+            android:exported="false" />
         <activity
             android:name=".GlobalScoreActivity"
             android:exported="false" />
