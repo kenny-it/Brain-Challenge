@@ -41,6 +41,8 @@ public class StageTwoActivity extends AppCompatActivity implements View.OnClickL
     private Chronometer timer;
     private boolean coinsFound = false;
 
+    private boolean hasPrevHighScore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,8 +162,24 @@ public class StageTwoActivity extends AppCompatActivity implements View.OnClickL
             int score = calculateScore(time);
             // Save the records on sharepreferences
             SharedPreferences sharedPreferences = getSharedPreferences(Constant.STAGETWO + username, MODE_PRIVATE);
+            // Check if there is a previous score and compare the score to save the highest score
+            // if the score is same as previous score, then compare the time to save the lowest time
+            int prevScore = sharedPreferences.getInt(Constant.SCORE, 0);
+            long prevTime = sharedPreferences.getLong(Constant.TIME, 0);
+            if (score < prevScore) {
+                hasPrevHighScore = true;
+            } else if (score == prevScore) {
+                if (time > prevTime) {
+                    time = prevTime;
+                }
+            }
+
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(Constant.SCORE, score);
+            if (hasPrevHighScore) {
+                editor.putInt(Constant.SCORE, prevScore);
+            } else {
+                editor.putInt(Constant.SCORE, score);
+            }
             editor.putLong(Constant.TIME, time);
             editor.apply();
 
@@ -169,6 +187,7 @@ public class StageTwoActivity extends AppCompatActivity implements View.OnClickL
             MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
             dialog.setTitle("Congratulations");
             dialog.setMessage("You have completed the stage 2 with score " + score);
+            dialog.setCancelable(false);
             dialog.setPositiveButton("Next", (dialog1, which) -> {
                 Intent intent = new Intent(this, StageThreeActivity.class);
                 startActivity(intent);

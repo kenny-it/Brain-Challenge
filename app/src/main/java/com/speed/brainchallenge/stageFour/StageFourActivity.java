@@ -41,6 +41,8 @@ public class StageFourActivity extends AppCompatActivity implements ImageButton.
 
     private Boolean isWin = null;
 
+    private boolean hasPrevHighScore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,8 +138,24 @@ public class StageFourActivity extends AppCompatActivity implements ImageButton.
         int score = calculateScore(time);
         // save the records on sharePreference
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.STAGEFOUR + username, MODE_PRIVATE);
+        // Check if there is a previous score and compare the score to save the highest score
+        // if the score is same as previous score, then compare the time to save the lowest time
+        int prevScore = sharedPreferences.getInt(Constant.SCORE, 0);
+        long prevTime = sharedPreferences.getLong(Constant.TIME, 0);
+        if (score < prevScore) {
+            hasPrevHighScore = true;
+        } else if (score == prevScore) {
+            if (time > prevTime) {
+                time = prevTime;
+            }
+        }
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Constant.SCORE, score);
+        if (hasPrevHighScore) {
+            editor.putInt(Constant.SCORE, prevScore);
+        } else {
+            editor.putInt(Constant.SCORE, score);
+        }
         editor.putLong(Constant.TIME, time);
         editor.apply();
 
@@ -148,6 +166,7 @@ public class StageFourActivity extends AppCompatActivity implements ImageButton.
         // Show dialog and go to next stage
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setTitle("Congratulations");
+        dialog.setCancelable(false);
         dialog.setMessage("You have completed the stage 4 with score " + score);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
