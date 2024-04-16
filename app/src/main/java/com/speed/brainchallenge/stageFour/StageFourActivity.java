@@ -29,6 +29,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.speed.brainchallenge.GameMenuActivity;
 import com.speed.brainchallenge.MainActivity;
 import com.speed.brainchallenge.R;
+import com.speed.brainchallenge.stageFive.StageFiveActivity;
 import com.speed.brainchallenge.utils.Constant;
 
 public class StageFourActivity extends AppCompatActivity implements ImageButton.OnClickListener, SensorEventListener {
@@ -170,8 +171,8 @@ public class StageFourActivity extends AppCompatActivity implements ImageButton.
         dialog.setMessage("You have completed the stage 4 with score " + score);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
-            //Intent intent = new Intent(this, StageFiveActivity.class).putExtra("username", username);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageFiveActivity.class).putExtra("username", username);
+            startActivity(intent);
         });
         dialog.setNegativeButton("Back to Menu", (dialog1, which) -> {
             // go back to main menu
