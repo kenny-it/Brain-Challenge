@@ -3,6 +3,8 @@ package com.speed.brainchallenge.utils;
 public class Constant {
     public static final String USERS = "Users";
     public static final String CURRENTUSER = "CurrentUser";
+    public static final String STAGEONE= "StageOne";
+    public static final String STAGETWO = "StageTwo";
     public static final String STAGETHREE = "StageThree_";
     public static final String STAGEFOUR = "StageFour_";
     public static final String SCORE = "Score";

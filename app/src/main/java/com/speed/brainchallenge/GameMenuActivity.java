@@ -15,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.card.MaterialCardView;
 import com.speed.brainchallenge.stageEight.StageEightActivity;
 import com.speed.brainchallenge.stageFour.StageFourActivity;
+import com.speed.brainchallenge.stageOne.StageOneActivity;
+import com.speed.brainchallenge.stageTwo.StageTwoActivity;
 import com.speed.brainchallenge.stagethree.StageThreeActivity;
 import com.speed.brainchallenge.utils.Constant;
 

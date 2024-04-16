@@ -24,4 +24,6 @@
     <string name="test">Test</string>
     <string name="your_highest_score">Your Highest Score</string>
     <string name="startgame">StartGame</string>
+    <string name="stage_no_2">Stage No.2</string>
+    <string name="find_the_coins">Find the coins!</string>
 </resources>
