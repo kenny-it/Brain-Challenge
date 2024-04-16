@@ -82,9 +82,12 @@ public class GlobalScoreActivity extends AppCompatActivity implements View.OnCli
         public void onTabSelected(TabLayout.Tab tab) {
             int i = tab.getPosition();
             if (i == 0) {
-
+                // update the stage 1 data
+                RenderStage1Data();
             }
             if (i == 1) {
+                // update the stage 2 data
+                RenderStage2Data();
             }
 
             if (i == 2) {
@@ -108,14 +111,95 @@ public class GlobalScoreActivity extends AppCompatActivity implements View.OnCli
             }
 
             if (i == 6) {
-
+                // update the stage 7 data
+                RenderStage7Data();
             }
 
             if (i == 7) {
-
+                // update the stage 8 data
+                RenderStage8Data();
             }
-
         }
+    
+    private void RenderStage1Data() {
+        // create an arraylist to store the object of the user
+        ArrayList<UserData> userDataList = new ArrayList<>();
+        itemList.clear();
+        // Get all the user data from the shared preferences
+        ArrayList<String> allUserName = getAllUserName();
+        // Get the stage 1 record from the shared preferences
+        for (String name : allUserName) {
+            SharedPreferences data = getSharedPreferences(Constant.STAGEONE + name, MODE_PRIVATE);
+            int score = data.getInt(Constant.SCORE, 0);
+            long time = data.getLong(Constant.TIME, 0);
+            userDataList.add(new UserData(name, score, time));
+        }
+
+        // Sort the user data by time
+        userDataList.sort((o1,o2) -> {
+            if (o1.getScore() == o2.getScore()) {
+                return Long.compare(o1.getTime(), o2.getTime());
+            }
+            return Integer.compare(o2.getScore(), o1.getScore());
+        });
+        // map to the global score list item
+        for (int i = 0; i < userDataList.size(); i++) {
+            long time = userDataList.get(i).getTime();
+            long minutes = time / 60;
+            long seconds = time % 60;
+            String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            itemList.add(
+                    new GlobalScoreListItem(
+                            userDataList.get(i).getUsername(),
+                            i + 1,
+                            userDataList.get(i).getScore(),
+                            timeFormatted
+                    )
+            );
+        }
+        // End of the for loop
+        RenderRecyclerView();
+    }
+
+    private void RenderStage2Data() {
+        // create an arraylist to store the object of the user
+        ArrayList<UserData> userDataList = new ArrayList<>();
+        itemList.clear();
+        // Get all the user data from the shared preferences
+        ArrayList<String> allUserName = getAllUserName();
+        // Get the stage 2 record from the shared preferences
+        for (String name : allUserName) {
+            SharedPreferences data = getSharedPreferences(Constant.STAGETWO + name, MODE_PRIVATE);
+            int score = data.getInt(Constant.SCORE, 0);
+            long time = data.getLong(Constant.TIME, 0);
+            userDataList.add(new UserData(name, score, time));
+        }
+
+        // Sort the user data by time
+        userDataList.sort((o1,o2) -> {
+            if (o1.getScore() == o2.getScore()) {
+                return Long.compare(o1.getTime(), o2.getTime());
+            }
+            return Integer.compare(o2.getScore(), o1.getScore());
+        });
+        // map to the global score list item
+        for (int i = 0; i < userDataList.size(); i++) {
+            long time = userDataList.get(i).getTime();
+            long minutes = time / 60;
+            long seconds = time % 60;
+            String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            itemList.add(
+                    new GlobalScoreListItem(
+                            userDataList.get(i).getUsername(),
+                            i + 1,
+                            userDataList.get(i).getScore(),
+                            timeFormatted
+                    )
+            );
+        }
+        // End of the for loop
+        RenderRecyclerView();
+    }
 
     private void RenderStage3Data() {
         // create an arraylist to store the object of the user
@@ -246,6 +330,86 @@ public class GlobalScoreActivity extends AppCompatActivity implements View.OnCli
         // Get the stage 6 record from the shared preferences
         for (String name : allUserName) {
             SharedPreferences data = getSharedPreferences(Constant.STAGESIX + name, MODE_PRIVATE);
+            int score = data.getInt(Constant.SCORE, 0);
+            long time = data.getLong(Constant.TIME, 0);
+            userDataList.add(new UserData(name, score, time));
+        }
+
+        // Sort the user data by time
+        userDataList.sort((o1,o2) -> {
+            if (o1.getScore() == o2.getScore()) {
+                return Long.compare(o1.getTime(), o2.getTime());
+            }
+            return Integer.compare(o2.getScore(), o1.getScore());
+        });
+        // map to the global score list item
+        for (int i = 0; i < userDataList.size(); i++) {
+            long time = userDataList.get(i).getTime();
+            long minutes = time / 60;
+            long seconds = time % 60;
+            String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            itemList.add(
+                    new GlobalScoreListItem(
+                            userDataList.get(i).getUsername(),
+                            i + 1,
+                            userDataList.get(i).getScore(),
+                            timeFormatted
+                    )
+            );
+        }
+        // End of the for loop
+        RenderRecyclerView();
+    }
+
+        private void RenderStage7Data() {
+        // create an arraylist to store the object of the user
+        ArrayList<UserData> userDataList = new ArrayList<>();
+        itemList.clear();
+        // Get all the user data from the shared preferences
+        ArrayList<String> allUserName = getAllUserName();
+        // Get the stage 7 record from the shared preferences
+        for (String name : allUserName) {
+            SharedPreferences data = getSharedPreferences(Constant.STAGESEVEN + name, MODE_PRIVATE);
+            int score = data.getInt(Constant.SCORE, 0);
+            long time = data.getLong(Constant.TIME, 0);
+            userDataList.add(new UserData(name, score, time));
+        }
+
+        // Sort the user data by time
+        userDataList.sort((o1,o2) -> {
+            if (o1.getScore() == o2.getScore()) {
+                return Long.compare(o1.getTime(), o2.getTime());
+            }
+            return Integer.compare(o2.getScore(), o1.getScore());
+        });
+        // map to the global score list item
+        for (int i = 0; i < userDataList.size(); i++) {
+            long time = userDataList.get(i).getTime();
+            long minutes = time / 60;
+            long seconds = time % 60;
+            String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            itemList.add(
+                    new GlobalScoreListItem(
+                            userDataList.get(i).getUsername(),
+                            i + 1,
+                            userDataList.get(i).getScore(),
+                            timeFormatted
+                    )
+            );
+        }
+        // End of the for loop
+        RenderRecyclerView();
+    }
+
+    private void RenderStage8Data() {
+        // create an arraylist to store the object of the user
+        ArrayList<UserData> userDataList = new ArrayList<>();
+        itemList.clear();
+        // Get all the user data from the shared preferences
+        ArrayList<String> allUserName = getAllUserName();
+        // Get the stage 8 record from the shared preferences
+        for (String name : allUserName) {
+            SharedPreferences data = getSharedPreferences(Constant.STAGEEIGHT + name, MODE_PRIVATE);
             int score = data.getInt(Constant.SCORE, 0);
             long time = data.getLong(Constant.TIME, 0);
             userDataList.add(new UserData(name, score, time));
