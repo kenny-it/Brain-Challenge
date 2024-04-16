@@ -13,11 +13,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
-import com.speed.brainchallenge.stageEight.StageEightActivity;
-import com.speed.brainchallenge.stageFour.StageFourActivity;
 import com.speed.brainchallenge.stageOne.StageOneActivity;
 import com.speed.brainchallenge.stageTwo.StageTwoActivity;
 import com.speed.brainchallenge.stagethree.StageThreeActivity;
+import com.speed.brainchallenge.stageFour.StageFourActivity;
+import com.speed.brainchallenge.stageFive.StageFiveActivity;
+import com.speed.brainchallenge.stageSix.StageSixActivity;
+import com.speed.brainchallenge.stageEight.StageEightActivity;
 import com.speed.brainchallenge.utils.Constant;
 
 public class GameMenuActivity extends AppCompatActivity {
@@ -77,20 +79,20 @@ public class GameMenuActivity extends AppCompatActivity {
 
         card_stage_4.setOnClickListener(v -> {
             // go to stage 4
-           Intent intent = new Intent(this, StageFourActivity.class);
+            Intent intent = new Intent(this, StageFourActivity.class);
             startActivity(intent);
         });
 
         card_stage_5.setOnClickListener(v -> {
             // go to stage 5
-            // Intent intent = new Intent(this, StageFiveActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageFiveActivity.class);
+            startActivity(intent);
         });
 
         card_stage_6.setOnClickListener(v -> {
             // go to stage 6
-            // Intent intent = new Intent(this, StageSixActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageSixActivity.class);
+            startActivity(intent);
         });
 
         card_stage_7.setOnClickListener(v -> {
