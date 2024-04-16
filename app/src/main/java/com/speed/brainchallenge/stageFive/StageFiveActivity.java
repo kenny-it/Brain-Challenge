@@ -165,8 +165,6 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
     private void win() {
         // stop timer
         timer.stop();
-        // set the background color to black
-        findViewById(R.id.main).setBackgroundColor(Color.BLACK);
         long time = (SystemClock.elapsedRealtime() - timer.getBase()) / 1000;
         // calculate the score
         int score = calculateScore(time);
