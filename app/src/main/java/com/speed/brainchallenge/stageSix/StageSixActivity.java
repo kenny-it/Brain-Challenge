@@ -231,13 +231,13 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
     private int calculateScore(long time) {
 
         int score = 0;
-        if (time <= 60) {
+        if (time <= 30) {
             score = 10;
-        } else if (time <= 90) {
+        } else if (time <= 45) {
             score = 8;
-        } else if (time <= 120) {
+        } else if (time <= 60) {
             score = 6;
-        } else if (time <= 180) {
+        } else if (time <= 120) {
             score = 4;
         } else if (time <= 240) {
             score = 2;
