@@ -12,7 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.speed.brainchallenge.GameMenuActivity;
 import com.speed.brainchallenge.MainActivity;
 import com.speed.brainchallenge.R;
-import com.speed.brainchallenge.stageSeven.StageSevenActivity;
+import com.speed.brainchallenge.StageActivitySeven;
 import com.speed.brainchallenge.utils.Constant;
 
 import android.os.SystemClock;
@@ -215,7 +215,7 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
         dialog.setMessage("You have completed the stage 6 with score " + score);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
-            Intent intent = new Intent(this, StageSevenActivity.class).putExtra("username", username);
+            Intent intent = new Intent(this, StageActivitySeven.class).putExtra("username", username);
             startActivity(intent);
         });
         dialog.setNegativeButton("Back to Menu", (dialog1, which) -> {
