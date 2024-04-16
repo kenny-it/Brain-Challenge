@@ -369,7 +369,7 @@ public class GlobalScoreActivity extends AppCompatActivity implements View.OnCli
         ArrayList<String> allUserName = getAllUserName();
         // Get the stage 7 record from the shared preferences
         for (String name : allUserName) {
-            SharedPreferences data = getSharedPreferences(Constant.STAGESEVEN + name, MODE_PRIVATE);
+            SharedPreferences data = getSharedPreferences(Constant.SEVENGAMESCORE + name, MODE_PRIVATE);
             int score = data.getInt(Constant.SCORE, 0);
             long time = data.getLong(Constant.TIME, 0);
             userDataList.add(new UserData(name, score, time));

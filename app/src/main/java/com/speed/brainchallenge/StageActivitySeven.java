@@ -9,12 +9,21 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.speed.brainchallenge.utils.Constant;
+
 public class StageActivitySeven extends AppCompatActivity {
+
+    private String username;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_seven);
         Button startbtn = findViewById(R.id.startbtn);
         Button returnbtn = findViewById(R.id.returnbtn);
+
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
 
 
         startbtn.setOnClickListener(v -> {
@@ -27,7 +36,7 @@ public class StageActivitySeven extends AppCompatActivity {
         });
         TextView highScoreTxt = findViewById(R.id.score);
 
-        SharedPreferences prefs = getSharedPreferences("sevenGameScore",MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(Constant.SEVENGAMESCORE + username,MODE_PRIVATE);
         highScoreTxt.setText("YOU Highest score "+ prefs.getInt("highscore",0));
 
 

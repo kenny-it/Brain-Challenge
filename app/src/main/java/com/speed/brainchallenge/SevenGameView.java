@@ -1,5 +1,7 @@
 package com.speed.brainchallenge;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +13,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
+import com.speed.brainchallenge.utils.Constant;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,6 +22,7 @@ import java.util.Random;
 public class SevenGameView extends SurfaceView implements  Runnable {
     //Create new Thread when the game started
     private Thread thread;
+    private String username;
     private boolean isRunning, isGameOver = false;
     private int screenX,screenY,score = 0;
     public static float RatioX,RatioY; //the size for the screen
@@ -40,7 +45,10 @@ public class SevenGameView extends SurfaceView implements  Runnable {
 
         this.activity = activity;
         //record the score.
-        prefs = activity.getSharedPreferences("sevenGameScore",Context.MODE_PRIVATE);
+        prefs = activity.getSharedPreferences(Constant.SEVENGAMESCORE+ username, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(Constant.USERS, MODE_PRIVATE);
+        username = sharedPreferences.getString(Constant.CURRENTUSER, "");
+
 
         Log.d("screenX", String.valueOf(screenX));
         this.screenX = screenX;
