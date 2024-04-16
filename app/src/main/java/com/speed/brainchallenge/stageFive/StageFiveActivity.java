@@ -186,6 +186,7 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setTitle("Congratulations");
         dialog.setMessage("You have completed the stage 5 with score " + score);
+        dialog.setCancelable(false);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
             Intent intent = new Intent(this, StageSixActivity.class).putExtra("username", username);
@@ -202,15 +203,15 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
     // count the sore by time
     private int calculateScore(long time) {
         int score = 0;
-        if (time <= 60) {
+        if (time <= 30) {
             score = 10;
-        } else if (time <= 90) {
+        } else if (time <= 45) {
             score = 8;
-        } else if (time <= 120) {
+        } else if (time <= 60) {
             score = 6;
-        } else if (time <= 180) {
+        } else if (time <= 120) {
             score = 4;
-        } else if (time <= 240) {
+        } else if (time <= 180) {
             score = 2;
         }
         return score;
