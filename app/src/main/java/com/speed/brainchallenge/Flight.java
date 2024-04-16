@@ -42,7 +42,7 @@ public class Flight {
         //Log.d("Ratio", String.valueOf(RatioX));
         width = (int) (width * RatioX);
         Log.d("width", String.valueOf(width));
-        height *= (int) RatioY;
+        height = (int) (height * RatioY);
         Log.d("height", String.valueOf(height));
 
         flight1 = Bitmap.createScaledBitmap(flight1,width,height,false);
