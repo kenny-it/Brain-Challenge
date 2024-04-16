@@ -213,6 +213,7 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setTitle("Congratulations");
         dialog.setMessage("You have completed the stage 6 with score " + score);
+        dialog.setCancelable(false);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
             Intent intent = new Intent(this, StageActivitySeven.class).putExtra("username", username);
