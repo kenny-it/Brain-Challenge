@@ -60,6 +60,8 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
     // int for count the values for moving of y
     private int yDelta;
 
+    private boolean hasPrevHighScore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,8 +192,6 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
     private void win() {
         // stop timer
         timer.stop();
-        // set the background color to black
-        findViewById(R.id.main).setBackgroundColor(Color.BLACK);
         long time = (SystemClock.elapsedRealtime() - timer.getBase()) / 1000;
         // calculate the score
         int score = calculateScore(time);
@@ -199,8 +199,25 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
         score -= missAnswer;
         // save the records on sharePreference
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.STAGESIX + username, MODE_PRIVATE);
+        // Check if there is a previous score and compare the score to save the highest score
+        // if the score is same as previous score, then compare the time to save the lowest time
+        int prevScore = sharedPreferences.getInt(Constant.SCORE, 0);
+        long prevTime = sharedPreferences.getLong(Constant.TIME, 0);
+        if (score < prevScore) {
+            hasPrevHighScore = true;
+            time = prevTime;
+        } else if (score == prevScore) {
+            if (time > prevTime) {
+                time = prevTime;
+            }
+        }
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Constant.SCORE, score);
+        if (hasPrevHighScore) {
+            editor.putInt(Constant.SCORE, prevScore);
+        } else {
+            editor.putInt(Constant.SCORE, score);
+        }
         editor.putLong(Constant.TIME, time);
         editor.apply();
         // show message to tell the result of the game and allow user to return
@@ -213,6 +230,7 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setTitle("Congratulations");
         dialog.setMessage("You have completed the stage 6 with score " + score);
+        dialog.setCancelable(false);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
             Intent intent = new Intent(this, StageActivitySeven.class).putExtra("username", username);
@@ -230,13 +248,13 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
     private int calculateScore(long time) {
 
         int score = 0;
-        if (time <= 60) {
+        if (time <= 30) {
             score = 10;
-        } else if (time <= 90) {
+        } else if (time <= 45) {
             score = 8;
-        } else if (time <= 120) {
+        } else if (time <= 60) {
             score = 6;
-        } else if (time <= 180) {
+        } else if (time <= 120) {
             score = 4;
         } else if (time <= 240) {
             score = 2;

@@ -54,6 +54,8 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
     private int[] numbers = new int[2];
     private int currentStep = 0;
 
+    private boolean hasPrevHighScore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)   {
         super.onCreate(savedInstanceState);
@@ -234,8 +236,24 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         int score = calculateScore(time);
         // Save the records on sharepreferences
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.STAGETHREE + username, MODE_PRIVATE);
+        // Check if there is a previous score and compare the score to save the highest score
+        // if the score is same as previous score, then compare the time to save the lowest time
+        int prevScore = sharedPreferences.getInt(Constant.SCORE, 0);
+        long prevTime = sharedPreferences.getLong(Constant.TIME, 0);
+        if (score < prevScore) {
+            hasPrevHighScore = true;
+            time = prevTime;
+        } else if (score == prevScore) {
+            if (time > prevTime) {
+                time = prevTime;
+            }
+        }
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Constant.SCORE, score);
+        if (hasPrevHighScore) {
+            editor.putInt(Constant.SCORE, prevScore);
+        } else {
+            editor.putInt(Constant.SCORE, score);
+        }
         editor.putLong(Constant.TIME, time);
         editor.apply();
 
@@ -246,6 +264,7 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setTitle("Congratulations");
         dialog.setMessage("You have completed the stage 3 with score " + score);
+        dialog.setCancelable(false);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
             Intent intent = new Intent(this, StageFourActivity.class);

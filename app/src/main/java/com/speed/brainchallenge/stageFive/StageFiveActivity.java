@@ -40,6 +40,8 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
     // accelerometer sensor
     private Sensor accelerometer;
 
+    private boolean hasPrevHighScore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +149,7 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
             // calculate the amount of the acceleration
             double accelerationAmount = Math.sqrt(x * x + y * y + z * z);
             // define a threshold for acceleration that count as shake
-            double threshold = 10.0;
+            double threshold = 13.0;
             // if the amount of the acceleration exceed the threshold
             if (accelerationAmount > threshold) {
                 // rduce the HP by 50
@@ -165,15 +167,30 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
     private void win() {
         // stop timer
         timer.stop();
-        // set the background color to black
-        findViewById(R.id.main).setBackgroundColor(Color.BLACK);
         long time = (SystemClock.elapsedRealtime() - timer.getBase()) / 1000;
         // calculate the score
         int score = calculateScore(time);
         // save the records on sharePreference
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.STAGEFIVE + username, MODE_PRIVATE);
+        // Check if there is a previous score and compare the score to save the highest score
+        // if the score is same as previous score, then compare the time to save the lowest time
+        int prevScore = sharedPreferences.getInt(Constant.SCORE, 0);
+        long prevTime = sharedPreferences.getLong(Constant.TIME, 0);
+        if (score < prevScore) {
+            hasPrevHighScore = true;
+            time = prevTime;
+        } else if (score == prevScore) {
+            if (time > prevTime) {
+                time = prevTime;
+            }
+        }
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Constant.SCORE, score);
+        if (hasPrevHighScore) {
+            editor.putInt(Constant.SCORE, prevScore);
+        } else {
+            editor.putInt(Constant.SCORE, score);
+        }
         editor.putLong(Constant.TIME, time);
         editor.apply();
         // show message to tell the result of the game and allow user to return
@@ -186,6 +203,7 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setTitle("Congratulations");
         dialog.setMessage("You have completed the stage 5 with score " + score);
+        dialog.setCancelable(false);
         dialog.setPositiveButton("Next", (dialog1, which) -> {
             // go to next stage
             Intent intent = new Intent(this, StageSixActivity.class).putExtra("username", username);
@@ -202,15 +220,15 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
     // count the sore by time
     private int calculateScore(long time) {
         int score = 0;
-        if (time <= 60) {
+        if (time <= 30) {
             score = 10;
-        } else if (time <= 90) {
+        } else if (time <= 45) {
             score = 8;
-        } else if (time <= 120) {
+        } else if (time <= 60) {
             score = 6;
-        } else if (time <= 180) {
+        } else if (time <= 120) {
             score = 4;
-        } else if (time <= 240) {
+        } else if (time <= 180) {
             score = 2;
         }
         return score;
