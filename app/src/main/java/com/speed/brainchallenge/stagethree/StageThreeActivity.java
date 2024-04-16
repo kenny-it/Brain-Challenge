@@ -242,6 +242,7 @@ public class StageThreeActivity extends AppCompatActivity implements SensorEvent
         long prevTime = sharedPreferences.getLong(Constant.TIME, 0);
         if (score < prevScore) {
             hasPrevHighScore = true;
+            time = prevTime;
         } else if (score == prevScore) {
             if (time > prevTime) {
                 time = prevTime;
