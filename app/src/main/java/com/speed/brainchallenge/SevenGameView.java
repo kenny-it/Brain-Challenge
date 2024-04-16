@@ -238,6 +238,10 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             if (isGameOver){
                 isRunning = false;
                 canvas.drawBitmap(flight.getDead(),flight.x,flight.y,paint);
+                Paint paintForGameOver = new Paint();
+                paintForGameOver.setTextSize(128);
+                paintForGameOver.setColor(Color.RED);
+                canvas.drawText("Game Over!", screenX/2f, 164,paintForGameOver);
                 getHolder().unlockCanvasAndPost(canvas);
                 saveIfHighScore();
                 waitBeforeExiting();
