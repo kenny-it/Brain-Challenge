@@ -53,9 +53,9 @@ public class PrivateScoreActivity extends AppCompatActivity {
         // Set the stage 4 record in the screen
         setStageFourRecord();
         // Set the stage 5 record in the screen
-        //setStageFiveRecord();
+        setStageFiveRecord();
         // Set the stage 6 record in the screen
-        //setStageSixRecord();
+        setStageSixRecord();
         // Set the stage 7 record in the screen
         //setStageSevenRecord();
         // Set the stage 8 record in the screen
@@ -146,6 +146,50 @@ public class PrivateScoreActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             // Set the stage 3 record in the screen
+            tv_score.setText("Score: 0");
+            tv_time.setText("Time: 00:00");
+        }
+    }
+    
+    private void setStageFiveRecord() {
+        TextView tv_score = findViewById(R.id.game5Score);
+        TextView tv_time = findViewById(R.id.game5Time);
+        try {
+            // Get the stage 5 record from the shared preferences
+            SharedPreferences data = getSharedPreferences(Constant.STAGEFIVE + username, MODE_PRIVATE);
+            int score = data.getInt(Constant.SCORE, 0);
+            long time = data.getLong(Constant.TIME, 0);
+            // Set the stage 5 record in the screen
+            tv_score.setText("Score: " + score);
+            long minutes = time / 60;
+            long seconds = time % 60;
+            String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            tv_time.setText("Time: " + timeFormatted);
+
+        } catch (Exception e) {
+            // Set the stage 5 record in the screen
+            tv_score.setText("Score: 0");
+            tv_time.setText("Time: 00:00");
+        }
+    }
+
+    private void setStageSixRecord() {
+        TextView tv_score = findViewById(R.id.game6Score);
+        TextView tv_time = findViewById(R.id.game6Time);
+        try {
+            // Get the stage 6 record from the shared preferences
+            SharedPreferences data = getSharedPreferences(Constant.STAGESIX + username, MODE_PRIVATE);
+            int score = data.getInt(Constant.SCORE, 0);
+            long time = data.getLong(Constant.TIME, 0);
+            // Set the stage 6 record in the screen
+            tv_score.setText("Score: " + score);
+            long minutes = time / 60;
+            long seconds = time % 60;
+            String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            tv_time.setText("Time: " + timeFormatted);
+
+        } catch (Exception e) {
+            // Set the stage 6 record in the screen
             tv_score.setText("Score: 0");
             tv_time.setText("Time: 00:00");
         }
