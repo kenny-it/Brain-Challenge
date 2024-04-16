@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".stageSix.StageSixActivity">
+
+    <!--Back button to game menu-->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:background="@null"
+        android:src="@drawable/back" />
+
+    <!--Timer-->
+    <Chronometer
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <!--Stage number-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="99dp"
+        android:text="stage_no.6"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <!--Goal of the game-->
+    <TextView
+        android:id="@+id/goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="140dp"
+        android:text="Count the number of grape"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <!--Image of grape cane-->
+    <ImageView
+        android:id="@+id/grapeCane"
+        android:layout_width="141dp"
+        android:layout_height="253dp"
+        android:layout_below="@id/goal"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/grape_cane" />
+
+    <!--Image of grape-->
+    <ImageView
+        android:id="@+id/grapeOne"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="302dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeTwo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="361dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeThree"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="419dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeFour"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="388dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeFive"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="179dp"
+        android:layout_marginTop="374dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeSix"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="347dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeSeven"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="211dp"
+        android:layout_marginTop="330dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeEight"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="276dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeNine"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="310dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeTen"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="206dp"
+        android:layout_marginTop="273dp"
+        android:src="@drawable/grape" />
+
+    <ImageView
+        android:id="@+id/grapeEleven"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="296dp"
+        android:src="@drawable/grape" />
+
+    <!--Text view for player to answer-->
+    <TextView
+        android:id="@+id/grapeNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/grapeCane"
+        android:layout_marginTop="40dp"
+        android:text="0"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp" />
+
+    <!--Button to subtract the text view-->
+    <ImageButton
+        android:id="@+id/subButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toLeftOf="@id/grapeNumberTextView"
+        android:layout_below="@id/grapeCane"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:background="@null"
+        android:src="@drawable/subtract" />
+
+    <!--Button to add the text-->
+    <ImageButton
+        android:id="@+id/addButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/grapeNumberTextView"
+        android:layout_below="@id/grapeCane"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:background="@null"
+        android:src="@drawable/add" />
+
+    <!--Button to answer the answer-->
+    <Button
+        android:id="@+id/answerButton"
+        android:text="Answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/grapeNumberTextView"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="26sp" />
+
+</RelativeLayout>
