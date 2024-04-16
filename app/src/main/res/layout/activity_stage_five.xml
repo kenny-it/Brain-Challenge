@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".stageFive.StageFiveActivity">
+
+    <!--Back button to game menu-->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:background="@null"
+        android:src="@drawable/back" />
+
+    <!--Timer-->
+    <Chronometer
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <!--Stage number-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="99dp"
+        android:text="stage_no.5"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <!--Goal of the game-->
+    <TextView
+        android:id="@+id/goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="140dp"
+        android:text="Destroy the building"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <!--image of the building-->
+    <ImageView
+        android:id="@+id/building"
+        android:layout_width="175dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/goal"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/building" />
+
+    <!--image of the ground-->
+    <ImageView
+        android:id="@+id/ground"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/building"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ground" />
+
+    <!--text view of the HP of the building-->
+    <TextView
+        android:id="@+id/hpTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ground"
+        android:layout_marginTop="20dp"
+        android:text="HP of the building:"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <!--HP of the building-->
+    <TextView
+        android:id="@+id/buildingHP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hpTextView"
+        android:layout_marginTop="10dp"
+        android:text="300/300"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+</RelativeLayout>

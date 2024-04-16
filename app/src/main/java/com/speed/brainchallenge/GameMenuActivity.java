@@ -13,9 +13,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
-import com.speed.brainchallenge.stageEight.StageEightActivity;
-import com.speed.brainchallenge.stageFour.StageFourActivity;
+import com.speed.brainchallenge.stageOne.StageOneActivity;
+import com.speed.brainchallenge.stageTwo.StageTwoActivity;
 import com.speed.brainchallenge.stagethree.StageThreeActivity;
+import com.speed.brainchallenge.stageFour.StageFourActivity;
+import com.speed.brainchallenge.stageFive.StageFiveActivity;
+import com.speed.brainchallenge.stageSix.StageSixActivity;
+import com.speed.brainchallenge.stageEight.StageEightActivity;
 import com.speed.brainchallenge.utils.Constant;
 
 public class GameMenuActivity extends AppCompatActivity {
@@ -56,16 +60,15 @@ public class GameMenuActivity extends AppCompatActivity {
 
 
         card_stage_1.setOnClickListener(v -> {
-            // go to stage 1 and pass the username
-            // Intent intent = new Intent(this, StageActivityOne.class);
-            //startActivity(intent);
-            Toast.makeText(this, "Stage 1", Toast.LENGTH_SHORT).show();
+            // go to stage 1
+            Intent intent = new Intent(this, StageOneActivity.class);
+            startActivity(intent);
         });
 
         card_stage_2.setOnClickListener(v -> {
             // go to stage 2
-            // Intent intent = new Intent(this, StageActivityTwo.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageTwoActivity.class);
+            startActivity(intent);
         });
 
         card_stage_3.setOnClickListener(v -> {
@@ -76,20 +79,20 @@ public class GameMenuActivity extends AppCompatActivity {
 
         card_stage_4.setOnClickListener(v -> {
             // go to stage 4
-           Intent intent = new Intent(this, StageFourActivity.class);
+            Intent intent = new Intent(this, StageFourActivity.class);
             startActivity(intent);
         });
 
         card_stage_5.setOnClickListener(v -> {
             // go to stage 5
-            // Intent intent = new Intent(this, StageActivityFive.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageFiveActivity.class);
+            startActivity(intent);
         });
 
         card_stage_6.setOnClickListener(v -> {
             // go to stage 6
-            // Intent intent = new Intent(this, StageActivitySix.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageSixActivity.class);
+            startActivity(intent);
         });
 
         card_stage_7.setOnClickListener(v -> {
