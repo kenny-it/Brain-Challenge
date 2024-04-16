@@ -28,7 +28,7 @@ public class StageActivitySeven extends AppCompatActivity {
         TextView highScoreTxt = findViewById(R.id.score);
 
         SharedPreferences prefs = getSharedPreferences("sevenGameScore",MODE_PRIVATE);
-        highScoreTxt.setText("YOU Highest score"+ prefs.getInt("highscore",0));
+        highScoreTxt.setText("YOU Highest score "+ prefs.getInt("highscore",0));
 
 
 
