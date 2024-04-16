@@ -60,6 +60,8 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
     // int for count the values for moving of y
     private int yDelta;
 
+    private boolean hasPrevHighScore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,8 +199,24 @@ public class StageSixActivity extends AppCompatActivity implements ImageButton.O
         score -= missAnswer;
         // save the records on sharePreference
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.STAGESIX + username, MODE_PRIVATE);
+        // Check if there is a previous score and compare the score to save the highest score
+        // if the score is same as previous score, then compare the time to save the lowest time
+        int prevScore = sharedPreferences.getInt(Constant.SCORE, 0);
+        long prevTime = sharedPreferences.getLong(Constant.TIME, 0);
+        if (score < prevScore) {
+            hasPrevHighScore = true;
+        } else if (score == prevScore) {
+            if (time > prevTime) {
+                time = prevTime;
+            }
+        }
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Constant.SCORE, score);
+        if (hasPrevHighScore) {
+            editor.putInt(Constant.SCORE, prevScore);
+        } else {
+            editor.putInt(Constant.SCORE, score);
+        }
         editor.putLong(Constant.TIME, time);
         editor.apply();
         // show message to tell the result of the game and allow user to return
