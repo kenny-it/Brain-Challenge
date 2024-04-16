@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class GameActivity extends AppCompatActivity {
+public class SevenGameActivity extends AppCompatActivity {
     private SevenGameView sevenGameView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

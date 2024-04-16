@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.util.Log;
 
 public class Flight {
     public int isShooting = 0;
@@ -40,9 +41,9 @@ public class Flight {
         height /= 4;
         //Log.d("Ratio", String.valueOf(RatioX));
         width = (int) (width * RatioX);
-        //Log.d("width", String.valueOf(width));
+        Log.d("width", String.valueOf(width));
         height *= (int) RatioY;
-        //Log.d("height", String.valueOf(height));
+        Log.d("height", String.valueOf(height));
 
         flight1 = Bitmap.createScaledBitmap(flight1,width,height,false);
         flight2 = Bitmap.createScaledBitmap(flight2,width,height,false);

@@ -22,4 +22,6 @@
     <string name="second_input_notification">Please input the second number you find!</string>
     <string name="result_input_notification">Now, calculate the sum of the previous two numbers and enter the result.</string>
     <string name="test">Test</string>
+    <string name="your_highest_score">Your Highest Score</string>
+    <string name="startgame">StartGame</string>
 </resources>

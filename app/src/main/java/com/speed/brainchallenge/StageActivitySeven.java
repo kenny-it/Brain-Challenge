@@ -11,9 +11,9 @@ public class StageActivitySeven extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_seven);
-        Button testbtn = findViewById(R.id.testbtn);
-        testbtn.setOnClickListener(v -> {
-            Intent intent = new Intent(StageActivitySeven.this,GameActivity.class);
+        Button startbtn = findViewById(R.id.startbtn);
+        startbtn.setOnClickListener(v -> {
+            Intent intent = new Intent(StageActivitySeven.this,SevenGameActivity.class);
             startActivity(intent);
         });
     }
