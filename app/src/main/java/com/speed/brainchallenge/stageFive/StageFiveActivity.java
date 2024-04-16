@@ -147,7 +147,7 @@ public class StageFiveActivity extends AppCompatActivity implements ImageButton.
             // calculate the amount of the acceleration
             double accelerationAmount = Math.sqrt(x * x + y * y + z * z);
             // define a threshold for acceleration that count as shake
-            double threshold = 10.0;
+            double threshold = 13.0;
             // if the amount of the acceleration exceed the threshold
             if (accelerationAmount > threshold) {
                 // rduce the HP by 50
