@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
+import com.speed.brainchallenge.stageEight.StageEightActivity;
 import com.speed.brainchallenge.stageFour.StageFourActivity;
 import com.speed.brainchallenge.stagethree.StageThreeActivity;
 import com.speed.brainchallenge.utils.Constant;
@@ -99,8 +100,8 @@ public class GameMenuActivity extends AppCompatActivity {
 
         card_stage_8.setOnClickListener(v -> {
             // go to stage 8
-            // Intent intent = new Intent(this, StageActivityEight.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, StageEightActivity.class);
+            startActivity(intent);
 
         });
 

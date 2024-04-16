@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BrainChallenge"
         tools:targetApi="31">
+
         <activity
             android:name=".stageFour.StageFourActivity"
             android:exported="false"
@@ -47,6 +48,9 @@
             android:name=".SevenGameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".stageEight.StageEightActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
