@@ -1,7 +1,10 @@
 package com.speed.brainchallenge;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
@@ -16,22 +19,29 @@ public class SevenGameView extends SurfaceView implements  Runnable {
     //Create new Thread when the game started
     private Thread thread;
     private boolean isRunning, isGameOver = false;
-    private int screenX,screenY;
+    private int screenX,screenY,score = 0;
     public static float RatioX,RatioY; //the size for the screen
     public Random random;
+    private SharedPreferences prefs;
     private Paint paint;
     //Flight()
     private Flight flight;
     private List<Bullet> bullets;
     //Enemy
     private Enemy[] enemies;
+    private SevenGameActivity activity;
     private Background background1, background2;
 
 
 
 
-    public SevenGameView(Context context, int screenX, int screenY) {
-        super(context);
+    public SevenGameView(SevenGameActivity activity, int screenX, int screenY) {
+        super(activity);
+
+        this.activity = activity;
+        //record the score.
+        prefs = activity.getSharedPreferences("sevenGameScore",Context.MODE_PRIVATE);
+
         Log.d("screenX", String.valueOf(screenX));
         this.screenX = screenX;
         Log.d("screenY", String.valueOf(screenY));
@@ -48,6 +58,7 @@ public class SevenGameView extends SurfaceView implements  Runnable {
         background2.x = screenX;
 
         Paint paint = new Paint();
+
 
 
         //Enemies started
@@ -153,7 +164,8 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             //Judgment hit box
             for (Enemy enemy : enemies){
                 if (Rect.intersects(enemy.getEnemyHitBoxShape(),bullet.getBulletHitBoxShape())){
-                    //The enemies will out of the screen
+                    //The enemies will out of the screen, and user get one point
+                    score++;
                     enemy.x = -500;
                     bullet.x = screenX+500;
                     //The enemies will disappear when bullet hit them
@@ -174,10 +186,10 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             if (enemy.x + enemy.width <0){
                 //judgment that if enemies were not be shoot and still out of the screen.
 
-                if (!enemy.isShooting){
-                    isGameOver = true;
-                    return;
-                }
+                //if (!enemy.isShooting){
+                    //isGameOver = true;
+                    //return;
+               // }
 
                 int max = (int) (30*RatioX); // Considering of Adaptive on each screen, the max number of the random speed use Ratio for the consideration.
                 Log.d("max", String.valueOf(max));
@@ -212,10 +224,22 @@ public class SevenGameView extends SurfaceView implements  Runnable {
             //Background 2
             canvas.drawBitmap(background2.background,background2.x,background2.y,paint);
 
+            for (Enemy enemy : enemies){
+                canvas.drawBitmap(enemy.getEnemy(),enemy.x,enemy.y,paint);
+            }
+            //Score
+            //Score
+            Paint paintForScore = new Paint();
+            paintForScore.setTextSize(128);
+            paintForScore.setColor(Color.WHITE);
+            canvas.drawText(score+"",screenX / 2f,164,paintForScore);
+
             //GameOver
             if (isGameOver){
                 isRunning = false;
                 canvas.drawBitmap(flight.getDead(),flight.x,flight.y,paint);
+                saveIfHighScore();
+                waitBeforeExiting();
                 getHolder().unlockCanvasAndPost(canvas);
                 return;
             }
@@ -235,6 +259,25 @@ public class SevenGameView extends SurfaceView implements  Runnable {
 
         }
     }
+
+    private void waitBeforeExiting() {
+        try{
+            Thread.sleep(3000);
+            activity.startActivity(new Intent(activity,StageActivitySeven.class));
+            activity.finish();
+        }catch (InterruptedException e){
+            e.printStackTrace();}
+    }
+
+    // Change the score if users get higher score.
+    private void saveIfHighScore() {
+        if (prefs.getInt("highscore",0)<score){
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("highscore",score);
+            editor.apply();
+        }
+    }
+
     private void sleep(){
         try{
             Thread.sleep(17); //1s/60 ~= 0.0166 ~=17 millis seconds, keep the background for 60 fps
